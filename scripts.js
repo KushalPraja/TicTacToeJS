@@ -129,10 +129,16 @@ class Player{
     }
 }
 
-var game = () => {
+var game = (input) => {
     // Create players
-    let player1 = new Player('Player 1', 'X');
-    let player2 = new Player('Player 2', 'O');
+    if (input === 'x'){
+        var player1 = new Player('Player 1', 'X');
+        var player2 = new Player('Player 2', 'O');
+    }
+    else{
+        var player1 = new Player('Player 1', 'O');
+        var player2 = new Player('Player 2', 'X');
+    }
 
     // Set current player as player1
     let currentPlayer = player1;
@@ -161,12 +167,12 @@ var game = () => {
                     if (board.check()) { // Check if the current player wins
                         console.log(currentPlayer.name + ' wins!');
                         gameover = true;
-                        endDialog(currentPlayer.name);
+                        endDialog(currentPlayer.name, currentPlayer.symbol);
                         return;
                     } else if (board.isFull()) { // Check for a draw
                         console.log('It\'s a draw!');
                         gameover = true;
-                        endDialog('draw');
+                        endDialog('draw', '');
                         return;
                     }
 
@@ -184,24 +190,23 @@ var game = () => {
                 playTurn(); // Retry the same turn
             }
         });
+
     };
 
+    //reset the game
+    if (gameover){
+        board.reset();
+        board.clearBoard();
+        board.render();
+        gameover = false;
+    }
     // Start the game
     playTurn();
-
-    // Reset the game
-    if (gameover) {
-        board.reset();
-        gameover = false;
-        currentPlayer = player1;
-        game();
-    }
-
 
 };
 
 // end screen dialog
-function endDialog(winner) {
+function endDialog(winner, symbol) {
     let message = document.getElementById('dialog-message');
     if (winner === 'draw') {
         message.innerHTML = 'It\'s a draw!';
@@ -214,8 +219,11 @@ function endDialog(winner) {
 
     let replay = document.getElementById('play-again');
     replay.addEventListener('click', function () {
+        if (symbol===''){
+            startScreen();
+        }
         dialog.close();
-        game();
+        game(symbol);
     });
 }
 
@@ -232,4 +240,23 @@ function receiveinputfromboard() {
 }
 
 
-game();
+function startScreen(){
+    let dialog = document.getElementById('start-dialog');
+    dialog.showModal();
+    
+    let x= document.getElementById('x');
+    let o= document.getElementById('o');
+
+    x.addEventListener('click', function(){
+        dialog.close();
+        game('x');
+    });
+    
+    o.addEventListener('click', function(){
+        dialog.close();
+        game('o');
+    });
+
+}
+
+startScreen();
