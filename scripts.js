@@ -261,7 +261,9 @@ function game(symbol) {
                         endDialog(player, currentPlayer.symbol);
                     }
                 } else {
+
                     // Switch players for the next turn
+
                     currentPlayer = (currentPlayer === player1) ? player2 : player1;
                     board = updatedBoard;
                     nextTurn(); // Continue the next turn
@@ -288,9 +290,11 @@ function playerTurn(player, gameover, board) {
                     if (board.check()) { // Check if the current player wins
                         console.log(player.name + ' wins!');
                         resolve([player.name, true, board]);
+                        endDialog(player.name, player.symbol);
                     } else if (board.isFull()) { // Check for a draw
                         console.log('It\'s a draw!');
                         resolve(['draw', true, board]);
+                        endDialog('draw', '');
                     } else {
                         resolve([player, false, board]); // Return to continue the game
                     }
@@ -305,9 +309,6 @@ function playerTurn(player, gameover, board) {
         });
     });
 }
-
-
-
 
 
 
@@ -326,6 +327,7 @@ function endDialog(winner, symbol) {
     dialog.showModal();
 
     let replay = document.getElementById('play-again');
+
     replay.addEventListener('click', function () {
         dialog.close();
         game(symbol);

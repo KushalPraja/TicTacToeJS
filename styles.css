@@ -1,11 +1,21 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    font-family: 'Outfit', sans-serif;
+
+}
+
+
 #container{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
     padding: 10px;
-    height: 100vh;
     border: 1px solid #000000;
-
+    margin: 200px;
 }
 
 
@@ -14,7 +24,8 @@
     padding: 10px;
     text-align: center;
     font-size: 30px;
-    border: 1px solid #000000;
+    border: 3px solid #d10000;
+    margin:10px;
 }
 body{
     margin: 0;
