@@ -129,6 +129,7 @@ class Player{
     }
 }
 
+/*
 var game = (input) => {
     // Create players
     if (input === 'x'){
@@ -204,6 +205,138 @@ var game = (input) => {
     playTurn();
 
 };
+*/
+
+/*
+var game = (input) => {
+    // Create players
+    let player1, player2;
+    if (input === 'x') {    var game = (input) => {
+        // Create players
+        let player1, player2;
+        if (input === 'x') {
+            player1 = new Player('Player 1', 'X');
+            player2 = new Player('Player 2', 'O');
+        } else {
+            player1 = new Player('Player 1', 'O');
+            player2 = new Player('Player 2', 'X');
+        }
+    
+        // Initialize variables
+        let currentPlayer = player1;
+        let board = gameboard();
+        let gameover = false;
+    
+        // Initialize the game board and render it
+        board.clearBoard();
+        board.render();
+    
+        // Function to reset the game
+        const resetGame = () => {
+            board.reset();
+            board.clearBoard();
+            board.render();
+            currentPlayer = player1;
+            gameover = false;
+            playTurn(); // Restart the game
+        };
+    
+        // Function to handle each turn
+        const playTurn = () => {
+            if (gameover) return; // Stop if the game is over
+    
+            let message = document.getElementById('message');
+            message.innerHTML = currentPlayer.name + '\'s turn'; // Display current player's turn
+    
+            // Wait for user input
+            receiveinputfromboard().then(({ row, col }) => {
+                if (row >= 0 && row < 3 && col >= 0 && col < 3) {
+                    if (board.isCellEmpty(row, col)) { // Ensure the cell is empty
+                        board.update(row, col, currentPlayer.symbol); // Update board
+                        board.render(); // Render updated board
+    
+                        if (board.check()) { // Check if the current player wins
+                            message.innerHTML = currentPlayer.name + ' wins!';
+                            gameover = true;
+                        } else if (board.isFull()) { // Check if the board is full (draw)
+                            message.innerHTML = 'It\'s a draw!';
+                            gameover = true;
+                        } else {
+                            currentPlayer = currentPlayer === player1 ? player2 : player1; // Switch player
+                        }
+                    }
+                }
+            });
+        };
+    
+        // Start the game
+        playTurn();
+    };    
+
+*/
+
+/*
+    var game = (input) => {
+        // Create players
+        let player1, player2;
+        if (input === 'x') {
+            player1 = new Player('Player 1', 'X');
+            player2 = new Player('Player 2', 'O');
+        } else {
+            player1 = new Player('Player 1', 'O');
+            player2 = new Player('Player 2', 'X');
+        }
+    
+        // Initialize variables
+        let currentPlayer = player1;
+        let board = gameboard();
+        let gameover = false;
+    
+        // Initialize the game board and render it
+        board.clearBoard();
+        board.render();
+    
+        // Function to handle each turn
+        const playTurn = () => {
+            if (gameover) return; // Stop if the game is over
+    
+            let message = document.getElementById('message');
+            message.innerHTML = currentPlayer.name + '\'s turn'; // Display current player's turn
+    
+            // Wait for user input
+            receiveinputfromboard().then(({ row, col }) => {
+                if (row >= 0 && row < 3 && col >= 0 && col < 3) {
+                    if (board.isCellEmpty(row, col)) { // Ensure the cell is empty
+                        board.update(row, col, currentPlayer.symbol); // Update board
+                        board.clearBoard(); // Clear the board
+                        board.render(); // Render updated board
+    
+                        if (board.check()) { // Check if the current player wins
+                            message.innerHTML = currentPlayer.name + ' wins!';
+                            gameover = true;
+                        } else if (board.isFull()) { // Check if the board is full (draw)
+                            message.innerHTML = 'It\'s a draw!';
+                            gameover = true;
+                        } else {
+                            currentPlayer = currentPlayer === player1 ? player2 : player1; // Switch player; // Continue to the next turn
+                            return currentPlayer;
+
+                        }
+                    }
+                }
+            });
+        };
+
+
+
+    
+
+    
+    };
+
+
+
+*/
 
 // end screen dialog
 function endDialog(winner, symbol) {
@@ -227,6 +360,7 @@ function endDialog(winner, symbol) {
     });
 }
 
+/*
 // player choice when button is clicked
 function receiveinputfromboard() {
     return new Promise((resolve) => {
@@ -239,6 +373,112 @@ function receiveinputfromboard() {
     });
 }
 
+*/
+/*
+var game = (input) => {
+    // Create players
+    let player1, player2;
+    if (input === 'x') {
+        player1 = new Player('Player 1', 'X');
+        player2 = new Player('Player 2', 'O');
+    } else {
+        player1 = new Player('Player 1', 'O');
+        player2 = new Player('Player 2', 'X');
+    }
+
+    // Initialize variables
+    let currentPlayer = player1;
+    let board = gameboard();
+    let gameover = false;
+
+    // Initialize the game board and render it
+    board.clearBoard();
+    board.render();
+
+    // Display the current player's turn
+    const updateMessage = (message) => {
+        document.getElementById('message').innerHTML = message;
+    };
+
+    // Handle a single turn
+    const handleTurn = ({ row, col }) => {
+
+        if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) {
+            // Update the board
+            board.update(row, col, currentPlayer.symbol);
+            board.clearBoard();
+            board.render();
+
+            // Check for a win or draw
+            if (board.check()) {
+                updateMessage(`${currentPlayer.name} wins!`);
+                gameover = true;
+                endDialog(currentPlayer.name, currentPlayer.symbol);
+                board.reset();
+                board.clearBoard();
+                board.render();
+                gameover = false;
+
+            } else if (board.isFull()) {
+                updateMessage("It's a draw!");
+                gameover = true;
+                
+
+            } else {
+                // Switch player
+                currentPlayer = currentPlayer === player1 ? player2 : player1;
+                updateMessage(`${currentPlayer.name}'s turn`);
+            }
+        } else {
+            console.log('Invalid move or cell occupied. Try again.');
+        }
+    };
+
+    // Event listener to wait for user input
+    const waitForInput = () => {
+        const container = document.getElementById('container');
+        const clickHandler = (e) => {
+            if (gameover) {
+                container.removeEventListener('click', clickHandler); // Remove the listener if the game is over
+                return;
+            }
+
+            let cell = e.target;
+            if (!cell.id || cell.id.length !== 2) return; // Ensure the clicked element is a valid cell
+            let row = parseInt(cell.id[0]);
+            let col = parseInt(cell.id[1]);
+            handleTurn({ row, col }); // Process the turn
+        };
+
+        container.addEventListener('click', clickHandler);
+    };
+
+    // Start the game
+    updateMessage(`${currentPlayer.name}'s turn`);
+    waitForInput();
+
+
+};
+
+*/
+
+/*
+// Player choice when a cell is clicked
+function receiveinputfromboard() {
+    return new Promise((resolve) => {
+        document.getElementById('container').addEventListener(
+            'click',
+            function (e) {
+                let cell = e.target;
+                let row = parseInt(cell.id[0]);
+                let col = parseInt(cell.id[1]);
+                resolve({ row, col }); // Return the values when clicked
+            },
+            { once: true } // Ensure the listener is triggered only once
+        );
+    });
+}
+*/
 
 function startScreen(){
     let dialog = document.getElementById('start-dialog');
