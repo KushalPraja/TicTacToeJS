@@ -35,13 +35,25 @@
     <a href="https://github.com/kushalpraja/TicTacToeJS"><strong>Explore the repo »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/kushalpraja/TicTacToeJS">View Demo</a>
+    <a href="https://kushalpraja.github.io/TicTacToeJS/">View Demo</a>
     &middot;
     <a href="https://github.com/kushalpraja/TicTacToeJS/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
     <a href="https://github.com/kushalpraja/TicTacToeJS/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
+
+
+
+## Live Demo 🌐
+
+You can try out the game directly by visiting the live demo:
+
+[Play Tic-Tac-Toe AI Demo](https://kushalpraja.github.io/TicTacToeJS/)
+
+Enjoy battling the CPU and see if you can outsmart the AI! 🎮🤖 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- TABLE OF CONTENTS -->
 <!-- TABLE OF CONTENTS -->
