@@ -1,7 +1,12 @@
-class TicTacToe {
-    constructor() {
+class TicTacToe { //singleton class 
+    constructor(playerchoice) {
         this.board = Array.from({ length: 3 }, () => Array(3).fill('')); 
-        this.players = ['X', 'O']; 
+        if (playerchoice === 'X') {
+            this.players = ['X', 'O']; 
+        }
+        else {
+            this.players = ['O', 'X'];
+        }
         this.currentPlayerIndex = 0; 
         this.gameOver = false; 
         this.container = document.getElementById('container'); 
@@ -56,13 +61,27 @@ class TicTacToe {
 
         // Check for winner or draw
         if (this.checkWinner(row, col)) {
+
+            {
             this.updateMessage(`Player ${this.getCurrentPlayer()} wins!`);
-            this.showEndDialog(`${this.getCurrentPlayer()} wins!`);
-            this.gameOver = true;
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.style.pointerEvents = 'none';  // Prevent clicking
+            });
+            setTimeout(() => {
+                this.showEndDialog(`${this.getCurrentPlayer()} wins!`);
+                this.gameOver = true;
+                }, 2000);
+            }
         } else if (this.isBoardFull()) {
+            document.querySelectorAll('.cell').forEach((cell) => {
+                cell.classList.add('draw-cell'); // Add the draw highlight
+                cell.style.pointerEvents = 'none'; 
+            });
+            
             this.updateMessage("It's a draw!");
-            this.showEndDialog("It's a draw!");
-            this.gameOver = true;
+            setTimeout(() => {
+                this.showEndDialog("It's a draw!");
+                this.gameOver = true;} , 2000);
         } else {
             this.switchPlayer();
             this.updateMessage(`Player ${this.getCurrentPlayer()}'s turn`);
@@ -77,10 +96,36 @@ class TicTacToe {
 
     checkWinner(row, col) {
         const player = this.getCurrentPlayer();
-        if (this.board[row].every(cell => cell === player)) return true;
-        if (this.board.every(row => row[col] === player)) return true;
-        if (row === col && this.board.every((_, idx) => this.board[idx][idx] === player)) return true;
-        if (row + col === 2 && this.board.every((_, idx) => this.board[idx][2 - idx] === player)) return true;
+        if (this.board[row].every((cell, idx) => cell === player)) {
+            for (let i = 0; i < this.board[row].length; i++) {
+                document.querySelector(`[data-row="${row}"][data-col="${i}"]`).classList.add('winning-cell');
+            }
+            return true;
+        }
+        
+        if (this.board.every((row, idx) => row[col] === player)) {
+            for (let i = 0; i < this.board.length; i++) {
+                document.querySelector(`[data-row="${i}"][data-col="${col}"]`).classList.add('winning-cell');
+            }
+            return true;
+        }
+        
+        if (row === col && this.board.every((_, idx) => this.board[idx][idx] === player)) {
+            for (let i = 0; i < this.board.length; i++) {
+                document.querySelector(`[data-row="${i}"][data-col="${i}"]`).classList.add('winning-cell');
+            }
+            return true;
+        }
+        
+        if (row + col === this.board.length - 1 && this.board.every((_, idx) => this.board[idx][this.board.length - 1 - idx] === player)) {
+            for (let i = 0; i < this.board.length; i++) {
+                document.querySelector(`[data-row="${i}"][data-col="${this.board.length - 1 - i}"]`).classList.add('winning-cell');
+            }
+            return true;
+        }
+
+
+        
         return false;
     }
 
@@ -102,6 +147,7 @@ class TicTacToe {
         this.renderBoard();
     }
 
+
     addEventListeners() {
 
         // adding a hover effect to the cells
@@ -117,10 +163,16 @@ class TicTacToe {
                 e.target.dataset.hover = this.getCurrentPlayer();
                 e.target.style.cursor = 'pointer';
                 if (this.getCurrentPlayer() === 'X') {
-                    e.target.style.backgroundColor = 'rgba(0, 0, 223, 0.88)';
+                    e.target.classList.add('hover-x');
+                    e.target.style.backgroundColor = '#6495ED';
+                    e.target.style.boxShadow = '0 0 10px 5px rgba(0, 0, 255, 0.6), 0 0 30px rgba(0, 0, 255, 0.4)'; // Blue glow for X
                 } else {
-                    e.target.style.backgroundColor = 'rgb(207, 0, 0)';
+                    e.target.classList.add('hover-o');
+                    e.target.style.backgroundColor = '#F08080';
+                    e.target.style.boxShadow = '0 0 10px 5px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4)';
                 }
+                e.target.style.fontSize = '2em';
+                e.target.style.transform = 'scale(1.1)';
                 e.target.style.color = 'white';
                 e.target.textContent = this.getCurrentPlayer();
 
@@ -135,7 +187,10 @@ class TicTacToe {
 
             // Clear hover symbol on mouseout
             if (this.board[row][col] === '') {
+                e.target.style.transform = '';
                 e.target.dataset.hover = '';
+                e.target.classList.remove('hover-x', 'hover-o');
+                e.target.style.boxShadow = '';
                 e.target.style.backgroundColor = '';
                 e.target.textContent = '';
             }
@@ -154,4 +209,25 @@ class TicTacToe {
 }
 
 // Start the game
-new TicTacToe();
+function startScreen(){
+
+    const startMenu = document.getElementById('start-dialog')
+    startMenu.showModal();
+    
+    
+    const startButton = document.getElementById('player-x');
+    startButton.addEventListener('click', () => {
+        const game = new TicTacToe('X');
+        startMenu.close();
+    });
+
+    const startButton2 = document.getElementById('player-o');
+    startButton2.addEventListener('click', () => {
+        const game = new TicTacToe('O');
+        startMenu.close();
+    });
+
+
+}
+
+startScreen();
