@@ -53,9 +53,9 @@
 
     .winning-cell {
         animation: glow 1s infinite alternate;
-        box-shadow: 0 0 15px 5px rgba(255, 255, 0, 0.8); /* Yellow glow for winner */
-        background-color: #FFD700; /* Gold background for highlight */
-        border-color: #FFC107; /* Gold border to emphasize */
+        box-shadow: 0 0 15px 5px rgba(255, 255, 0, 0.8);
+        background-color: #FFD700; 
+        border-color: #FFC107; 
     }
     
     @keyframes glow {
@@ -82,7 +82,7 @@
         border: none;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        /* blur; */ 
+        
     }
 
     body:has(dialog[open]) {
@@ -107,51 +107,51 @@
 
     /* Grey background and no glow for a draw */
     .draw-cell {
-        animation: none; /* Stop any animation */
-        background-color: #808080; /* Light grey for draw */
-        box-shadow: none; /* Remove the glow effect */
-        color: white; /* Ensure text remains visible */
-        animation: glowWhite 1s infinite alternate; /* Pulsing white glow */
+        animation: none; 
+        background-color: #808080; 
+        box-shadow: none; 
+        color: white;
+        animation: glowWhite 1s infinite alternate; 
     }
 
     /* Pulsing X and O animation */
-    /* Keyframes for Player X */
+  
     @keyframes hoverGlowX {
         0% {
-            transform: perspective(500px) rotateX(5deg) translateY(-5px); /* Initial tilt */
-            box-shadow: 0 0 15px rgba(0, 0, 255, 0.6); /* Blue glow for Player X */
+            transform: perspective(500px) rotateX(5deg) translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 0, 255, 0.6); 
         }
         100% {
-            transform: perspective(500px) rotateX(-5deg) translateY(-10px); /* Opposite tilt */
-            box-shadow: 0 0 25px rgba(0, 0, 255, 1); /* Stronger blue glow for Player X */
+            transform: perspective(500px) rotateX(-5deg) translateY(-10px);
+            box-shadow: 0 0 25px rgba(0, 0, 255, 1); 
         }
     }
 
     /* Keyframes for Player O */
     @keyframes hoverGlowO {
         0% {
-            transform: perspective(500px) rotateX(5deg) translateY(-5px); /* Initial tilt */
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Red glow for Player O */
+            transform: perspective(500px) rotateX(5deg) translateY(-5px); 
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); 
         }
         100% {
-            transform: perspective(500px) rotateX(-5deg) translateY(-10px); /* Opposite tilt */
-            box-shadow: 0 0 25px rgba(255, 0, 0, 1); /* Stronger red glow for Player O */
+            transform: perspective(500px) rotateX(-5deg) translateY(-10px);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 1); 
         }
     }
 
     .hover-x {
-    animation: hoverGlowX 0.6s infinite alternate; /* Apply the hover animation */
-    transform: perspective(500px) rotateX(5deg) translateY(-5px); /* 3D tilt and lift */
-    box-shadow: 0 0 15px 5px rgba(0, 0, 255, 0.6); /* Blue glow */
-    color: white; /* Text color */
+    animation: hoverGlowX 0.6s infinite alternate;
+    transform: perspective(500px) rotateX(5deg) translateY(-5px); 
+    box-shadow: 0 0 15px 5px rgba(0, 0, 255, 0.6);
+    color: white; 
 }
 
     /* Hover animation for Player O */
     .hover-o {
-        animation: hoverGlowO 0.6s infinite alternate; /* Apply the hover animation */
-        transform: perspective(500px) rotateX(5deg) translateY(-5px); /* 3D tilt and lift */
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6); /* Red glow */
-        color: white; /* Text color */
+        animation: hoverGlowO 0.6s infinite alternate;
+        transform: perspective(500px) rotateX(5deg) translateY(-5px); 
+        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6);
+        color: white; 
     }
 
 
@@ -164,8 +164,6 @@
  
  .footer-2 {
     
-    
-   
     backdrop-filter: blur(100px);
     border-radius: 120px;
     border: 1px solid rgba(255, 255, 255, 0.411);
@@ -173,16 +171,14 @@
     color: #000000; /* White text */
     text-align: center; /* Center content */
     margin-bottom:15px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif; /* Clean font */
-    width: 95%; /* Full width */
-    /* stick to the bottom */
-    bottom: 0; /* Stick to the bottom */
-    position: fixed; /* Fixed position */
+    width: 95%;
+    bottom: 0; 
+    position: fixed; 
   }
   
   .footer-2 a {
     text-decoration: none;
-    color: inherit; /* Same as the text color */
+    color: inherit; 
     margin-left: 10px;
   }
   
@@ -192,95 +188,119 @@
   }
   
   .github-logo {
-    width: 20px; /* Size of the icon */
+    width: 20px; 
     height: 20px;
-    /* align-self: center; /* Center vertically */
-
     align-self: center;
-    /*filter: invert(1); /* Makes the logo white */
-    transition: transform 0.3s ease; /* Smooth animation */
+    transition: transform 0.3s ease;
   }
   
   .github-logo:hover {
-    transform: scale(1.2); /* Slight zoom effect on hover */
+    transform: scale(1.2); 
   }
 
 
-  /* Centering the dialog */
+
 #start-dialog {
-    background-color: #FFFFFF; /* White background */
-    border: solid 2px #10254d; /* Blue border */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #FFFFFF; 
+    border: solid 2px #10254d; 
+    border-radius: 10px;
     padding: 30px;
-    width: 300px; /* Fixed width */
+    width: 300px; 
     text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.541); /* Soft shadow for depth */
-    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
-    color: #141E30; /* Dark text for readability */
-    z-index: 9999; /* Ensure the dialog is on top */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.541); 
+    font-family: 'Arial', sans-serif; 
+    color: #141E30; 
+    z-index: 9999; 
 }
 
 /* Title styling */
 #start-dialog h1 {
     font-size: 1.8rem;
-    margin-bottom: 20px; /* Space between title and content */
-    color: #243B55; /* Slightly darker blue for the title */
+    margin-bottom: 20px; 
+    color: #243B55; 
 }
 
 /* Paragraph styling */
 dialog p {
     font-size: 1.2rem;
-    margin-bottom: 30px; /* Space between text and buttons */
-    color: #555; /* Subtle gray text */
+    margin-bottom: 30px; 
+    color: #555; 
 }
 
 /* Button styling */
 dialog button {
-    background-color: #243B55; /* Cornflower blue for button */
-    color: white; /* Text color */
+    background-color: #243B55; 
+    color: white;
     font-size: 1.5rem;
     border: none !important ;
     padding: 10px 20px;
     margin: 10px;
-    border-radius: 5px; /* Rounded corners for buttons */
+    border-radius: 5px; 
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth button effects */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
-/* Button hover effect */
+
 dialog button:hover {
-    background-color: #141E30; /* Darker blue when hovered */
-    transform: translateY(-2px); /* Subtle lift on hover */
+    background-color: #141E30; 
+    transform: translateY(-2px); 
 }
 
-/* Button active effect (pressed) */
+
 dialog button:active {
-    background-color: #3b5b8c; /* Even darker blue on click */
-    transform: translateY(1px); /* Button "press" effect */
+    background-color: #3b5b8c; 
+    transform: translateY(1px); 
 }
 
 dialog button:focus {
-    outline: none; /* Remove the default focus outline */
+    outline: none;
 }
 
-/* Centering the dialog */
+
 #dialog {
-    background-color: #FFFFFF; /* White background */
+    background-color: #FFFFFF;
     border: none;
     filter: blur(0px);
-    border-radius: 10px; /* Rounded corners */
+    border-radius: 10px; 
     padding: 30px;
-    width: 200px; /* Fixed width */
+    width: 200px; 
     text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
-    color: #141E30; /* Dark text for readability */
-    z-index: 9999; /* Ensure the dialog is on top */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
+    font-family: 'Arial', sans-serif;
+    color: #141E30;
+    z-index: 9999;
 }
 
-/* Paragraph styling for the dialog message */
+
 #dialog-message {
     font-size: 1.5rem;
-    margin-bottom: 30px; /* Space between message and button */
-    color: #555; /* Subtle gray text */
+    margin-bottom: 30px;
+    color: #555; 
+}
+
+#chooseopponent {
+      
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 400px; 
+    width: 90%;
+    text-align: center;
+    background-color: #141E30;  
+    color: white;
+    border-radius: 10px;
+    border: 3px solid #243B55;
+}
+
+
+#chooseopponent h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+
+#chooseopponent p {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
 }

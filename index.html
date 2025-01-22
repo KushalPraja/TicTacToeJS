@@ -4,13 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    
 <title>Tic-Tac-Toe</title>
 </head>
 <body>
 
  
-   
+   <dialog id="chooseopponent">
+        <h1 >Tic Tac Toe</h1>
+        <p>Choose your opponent</p>
+        <button id="player"> Player </button>
+        <button id="bot" style="font-weight: bolder;"><i>GVUP</i> CPU </button>
+    </dialog>
+
+    <script>
+        const dialog = document.getElementById('chooseopponent');
+        dialog.showModal();
+    
+        document.getElementById('player').addEventListener('click', function() {
+            var script = document.createElement('script');
+            script.type = 'module'; 
+            script.src = 'scripts.js';  
+            document.head.appendChild(script);  
+            document.getElementById('chooseopponent').close(); 
+        });
+    
+        document.getElementById('bot').addEventListener('click', function() {
+        
+            var script = document.createElement('script');
+            script.type = 'module'; 
+            script.src = 'TicTacToeBotGame.js';
+            document.head.appendChild(script); 
+            document.getElementById('chooseopponent').close();
+        });
+    </script>
+    
+
+
     <dialog id="start-dialog">
         <h1>Tic Tac Toe</h1>
         <p>Choose your player</p>
